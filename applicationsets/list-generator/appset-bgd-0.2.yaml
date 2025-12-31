@@ -1,22 +1,21 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: bgd
-  #namespace: openshift-gitops
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      # v0.2.0+ form - does not require cluster/URL keys (but are still supported)
-      - overlay: blue
-        gitRepo: https://github.com/christianh814/gitops-examples
-        appPath: applicationsets/list-generator/v0.2/k8s/overlays
-        appBranch: main
-      - overlay: green
-        gitRepo: https://gitlab.com/christianh814/test-applicationsets.git
-        appPath: list-generator/k8s/overlays
-        appBranch: main
+    - list:
+        elements:
+          - overlay: blue
+            gitRepo: https://github.com/mahagony/gitops-examples
+            appPath: applicationsets/list-generator/v0.2/k8s/overlays
+            appBranch: main
+          - overlay: green
+            gitRepo: https://gitlab.com/mahagony4/test-applicationsets.git
+            appPath: list-generator/k8s/overlays
+            appBranch: main
   template:
     metadata:
       name: 'bgd-{{overlay}}'
@@ -39,3 +38,4 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: 'bgd-{{overlay}}'
+...

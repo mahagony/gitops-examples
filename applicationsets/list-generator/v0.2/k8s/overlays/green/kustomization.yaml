@@ -1,10 +1,11 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namespace: bgd-green
 
 bases:
-- ../../base
+  - ../../base
 patchesJson6902:
   - target:
       version: v1
@@ -19,4 +20,5 @@ patchesJson6902:
       name: bgd-ingress
     path: bgd-ing.yaml
 resources:
-- bgd-namespace.yaml
+  - bgd-namespace.yaml
+...

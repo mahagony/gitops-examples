@@ -1,20 +1,19 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    ingress.kubernetes.io/force-ssl-redirect: "false"
-    ingress.kubernetes.io/ssl-redirect: "false"
   name: bgd-ingress
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
-  - host: bgd.7f000001.nip.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: bgd
-            port:
-              number: 8080
+    - host: bgd.minikube.mahagony4.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bgd
+                port:
+                  number: 8080
+...
